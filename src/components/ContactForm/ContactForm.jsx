@@ -34,21 +34,25 @@ export function ContactForm() {
 
   const handleInputSubmit = event => {
     event.preventDefault();
+
+    if (contacts.some(contact => contact.name === name)) {
+      alert(`'${name}' is already in contacts`);
+      return;
+    }
+
+    if (contacts.some(contact => contact.number === number)) {
+      alert(`'${number}' is already in contacts`);
+      return;
+    }
+
+
     const newContact = {
       id: nanoid(),
       name,
       number,
     };
     contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())
-    // if (name.trim() === '' || number.trim() === '') {
-    //   alert('Please enter a valid name and number.');
-    //   return;
-    // }
 
-    // if (contacts.some(contact => contact.name === name)) {
-    //   alert(`'${name}' is already in contacts`);
-    //   return;
-    // }
 
 
     dispatch(addContact(newContact));
@@ -94,3 +98,12 @@ export function ContactForm() {
 
 }
 
+// if (name.trim() === '' || number.trim() === '') {
+//   alert('Please enter a valid name and number.');
+//   return;
+// }
+
+// if (contacts.some(contact => contact.name === name)) {
+//   alert(`'${name}' is already in contacts`);
+//   return;
+// }
